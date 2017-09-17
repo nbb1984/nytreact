@@ -5,15 +5,16 @@ var Link = require("react-router").Link;
 var Main = React.createClass({
   // Here we render the function
   render: function() {
+    console.log(this.props.children);
     return (
       <div className="container">
-        <div className="jumbotron">
-          <h2><strong>New York Times</strong></h2>
-          <p><em>Article Scraper</em></p>
+        <div className="jumbotron text-center">
+          <h2><strong>New York Times React</strong></h2>
+          <p><em>Get the Latest News</em></p>
           <hr />
           <p>
-            <Link to="/Child1"><button className="btn btn-primary btn-lg">Show Child #1</button></Link>
-            <Link to="/Child2"><button className="btn btn-danger btn-lg">Show Child #2</button></Link>
+            <Link to="/Search"><button className="btn btn-default">Search</button></Link>
+            <Link to="/Saved"><button className="btn btn-default">Saved</button></Link>
           </p>
         </div>
         <div className="row">
@@ -21,6 +22,7 @@ var Main = React.createClass({
           {this.props.children}
         </div>
       </div>
+
     );
   }
 });

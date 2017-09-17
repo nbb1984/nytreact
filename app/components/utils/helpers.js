@@ -1,41 +1,35 @@
+// Include the axios package for performing HTTP requests (promise based alternative to request)
 var axios = require("axios");
+// Geocoder API
+var authKey = "773715afedf64e6e892dc4d4f8b41ebd";
+// Helper functions for making API Calls
 var helper = {
-  // This logs in.
-  searchArticles: function(username, password) {
-      // Geocoder API
-      var authKey = "b9f91d369ff59547cd47b931d8cbc56b:0:74623931";
+  // This function serves our purpose of running the query to geolocate.
+  runQuery: function(search) {
 
-      // Helper functions for making API Calls
-      var helper = {
-        // This function serves our purpose of running the query to geolocate.
-        runQuery: function(location) {
-          console.log(location);
-          // Figure out the geolocation
-          var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
-                authKey + "&q=";
-          return axios.get(queryURL).then(function(response) {
-            // If get get a result, return that result's formatted address property
-            if (response.data.results[0]) {
-              return response.data.results;
-            }
-            // If we don't get any results, return an empty string
-            return "";
-          });
-      }
-    }
+    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+          authKey + "&q=" + search;
+
+    return axios.get(queryURL).then(function(res) {
+      console.log(res);
+      console.log(res.data.response.docs);
+      return res.data.response.docs;
+    });
+
   },
-
+  saveArticle: function(headline, url, date) {
+    console.log(headline, url, date);
+    return axios.post("api/saved/", {title: headline, url: url, date: date});
+  },
   // This function hits our own server to retrieve the record of query results
-  getSaved: function(article) {
-    console.log(username);
+  getSavedArticles: function() {
     return axios.get("/api/saved");
   },
-  deleteSaved: function(article) {
-    console.log('register user');
-    return axios.post("/api/saved" + article);
-
+  // This function posts new searches to our database.
+  deleteSavedArticle: function(id) {
+    console.log(id);
+    return axios.delete("/api/saved/delete/" + id);
   }
-
 };
 // We export the API helper
 module.exports = helper;

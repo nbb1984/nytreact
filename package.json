@@ -1,31 +1,26 @@
 {
-  "name": "nytreact",
+  "name": "React_New_York_Times",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "public/index.html",
   "scripts": {
+    "dev": "webpack & node server",
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "webpack -w"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nbb1984/nytreact.git"
-  },
-  "author": "",
+  "author": "Nicholas Bole",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nbb1984/nytreact/issues"
-  },
-  "homepage": "https://github.com/nbb1984/nytreact#readme",
   "dependencies": {
-    "axios": "^0.16.2",
-    "body-parser": "^1.18.1",
-    "express": "^4.15.4",
-    "mongoose": "^4.11.11",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-router": "^4.2.0",
-    "webpack": "^3.5.6"
+    "axios": "^0.12.0",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "moment": "^2.18.1",
+    "mongoose": "^4.5.1",
+    "morgan": "^1.7.0",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-router": "^2.4.1"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

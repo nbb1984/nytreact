@@ -7,9 +7,6 @@ var Route = router.Route;
 // Include the Router component to contain all our Routes
 // Here where we can pass in some configuration as props
 var Router = router.Router;
-// Including router.Redirect so that we can change pages after certain conditions are met.
-var Redirect = router.Redirect;
-
 // Include the hashHistory prop to handle routing client side without a server
 // https://github.com/ReactTraining/react-router/blob/master/docs/guides/Histories.md#hashhistory
 var hashHistory = router.hashHistory;
@@ -17,18 +14,23 @@ var hashHistory = router.hashHistory;
 var IndexRoute = router.IndexRoute;
 // Reference the high-level components
 var Main = require("../components/Main");
-var Saved = require("../components/children/Saved");
 var Search = require("../components/children/Search");
-
+var Saved = require("../components/children/Saved");
+var Query = require("../components/children/grandchildren/Query");
+var Results = require("../components/children/grandchildren/Results");
 // Export the Routes
 module.exports = (
   // The high level component is the Router component
   <Router history={hashHistory}>
     <Route path="/" component={Main}>
       {/* If user selects Search then show the appropriate component*/}
-      <Route path="Search" component={Search}>
+      <Route path="Search" component={Search} >
+        {/* Search has its own Grandchildren options */}
+        <Route path="Query" component={Query} />
+        <Route path="Results" component={Results} />
+        <IndexRoute component={Query} />
       </Route>
-      {/* If user selects Search then show the appropriate component*/}
+      {/* If user selects Saved then show the appropriate component*/}
       <Route path="Saved" component={Saved} />
       {/* If user selects any other path... we get the Home Route */}
       <IndexRoute component={Search} />
